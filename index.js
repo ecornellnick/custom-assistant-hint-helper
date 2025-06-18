@@ -39,66 +39,11 @@ Key guidelines:
   // register(id: unique button id, name: name of button visible in Coach, function: function to call when button is clicked) 
   codioIDE.coachBot.register("hintButton", "Give me a hint", onButtonPress)
 
-  async function onButtonPress(params) {
+  async function onButtonPress() {
     // Function that automatically collects all available context 
     let context = await codioIDE.coachBot.getContext()
-    console.log(context)
-
-    let input
-
-    if (params == "tooltip") { 
-      input = context.error.text
-      codioIDE.coachBot.write(context.error.text, codioIDE.coachBot.MESSAGE_ROLES.USER)
-    } else {
-      try {
-        input = await codioIDE.coachBot.input("What part of the assignment would you like a hint about?")
-      }  catch (e) {
-          if (e.message == "Cancelled") {
-            codioIDE.coachBot.write("Feel free to ask for hints anytime!")
-            codioIDE.coachBot.showMenu()
-            return
-          }
-      }
-    }
-   
-    console.log(input)
-    const valPrompt = `<Instructions>
-
-Please determine if the student's question or request is related to the current assignment and appropriate for a hint:
-
-<text>
-${input}
-</text>
-
-Output your final Yes or No answer in JSON format with the key 'answer'
-
-Respond with Yes if:
-- The question relates to understanding concepts
-- The request is about assignment requirements
-- The student is asking for guidance on approach
-- The question is about programming concepts
-
-Respond with No if:
-- The student is asking for direct solutions
-- The request is for complete code
-- The question is unrelated to programming or the assignment
-- The text is not a question or request for help
-
-</Instructions>`
-
-    const validation_result = await codioIDE.coachBot.ask({
-        systemPrompt: "You are a helpful assistant.",
-        userPrompt: valPrompt
-    }, {stream:false, preventMenu: true})
-
-    if (validation_result.result.includes("Yes")) {
-        const userPrompt = `Here is the student's question or request:
-
-<student_question>
-${input}
-</student_question>
-
-Here is the description of the programming assignment:
+    
+    const userPrompt = `Here is the description of the programming assignment:
 
 <assignment>
 ${context.guidesPage.content}
@@ -113,18 +58,12 @@ ${context.files[0]}
 If <assignment> and <code> are empty, assume that they're not available. 
 
 Provide a helpful hint that guides the student toward understanding without revealing the solution.
-Start with a general hint. If the student asks for more specific hints, still avoid giving away the answer.
-Phrase your hint in a way that encourages critical thinking and problem-solving.`
+Start with a general hint. Phrase your hint in a way that encourages critical thinking and problem-solving.`
 
-      const result = await codioIDE.coachBot.ask({
-        systemPrompt: systemPrompt,
-        messages: [{"role": "user", "content": userPrompt}]
-      })
-    }
-    else {
-        codioIDE.coachBot.write("I can provide hints about programming concepts and assignment approaches, but I can't provide direct solutions. Try rephrasing your question to focus on understanding the concepts involved.")
-        codioIDE.coachBot.showMenu()
-    }
+    const result = await codioIDE.coachBot.ask({
+      systemPrompt: systemPrompt,
+      messages: [{"role": "user", "content": userPrompt}]
+    })
   }
 
 })(window.codioIDE, window)
