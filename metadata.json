@@ -1,5 +1,5 @@
 {
-  "name": "eCornell Custom Helper Assistant",
+  "name": "eCornell Custom Hint Assistant",
   "type": "helper",
   "properties": {
     "user_type": "all", 
