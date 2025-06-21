@@ -52,13 +52,14 @@ Key guidelines:
 ${context.guidesPage.content}
 </assignment>
 
-Here is the student's current code:
+Note: Here is a list of items that are not part of the assignment instructions:
+1. Anything in html <style> tags.
+2. Anything in html <script> tags.
+3. Anything that resembles autograder feedback about passing or failing tests, i.e. check passed, total passed, total failed, etc.
 
-<current_code>
-${context.files[0]}
-</current_code> 
+If any of the above are present in the <assignment>, ignore them as if they're not provided to you
 
-If <assignment> and <code> are empty, assume that they're not available. 
+Phrase your explanation directly addressing the student as 'you'.
 
 Provide a helpful hint that guides the student toward understanding without revealing the solution.
 Start with a general hint. Phrase your hint in a way that encourages critical thinking and problem-solving.
@@ -66,6 +67,13 @@ When you are done giving the hint, do not ask any questions if the student needs
 student to specifically type back, so after your hint, do not ask if the student for any further input to give you.
 Again, do not ask the student for any input, to share their work so far, or if they have any questions. The student cannot reply to you.`
 
+// Uncomment and add this to the string above to add student code files. This code might need additional tweaks to actually pull student code, however.
+// Here is the student's current code:
+
+// <current_code>
+// ${context.files[0]}
+// </current_code> 
+    
     const result = await codioIDE.coachBot.ask({
       systemPrompt: systemPrompt,
       messages: [{"role": "user", "content": userPrompt}]
