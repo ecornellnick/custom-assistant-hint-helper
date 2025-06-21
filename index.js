@@ -37,7 +37,7 @@ Key guidelines:
   })
 
   // register(id: unique button id, name: name of button visible in Coach, function: function to call when button is clicked) 
-  codioIDE.coachBot.register("hintButton", "Give me a hint", onButtonPress)
+  codioIDE.coachBot.register("hintButton", "Provide a hint on what to do next", onButtonPress)
 
   async function onButtonPress() {
     // Function that automatically collects all available context 
