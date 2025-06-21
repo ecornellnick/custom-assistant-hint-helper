@@ -58,7 +58,9 @@ ${context.files[0]}
 If <assignment> and <code> are empty, assume that they're not available. 
 
 Provide a helpful hint that guides the student toward understanding without revealing the solution.
-Start with a general hint. Phrase your hint in a way that encourages critical thinking and problem-solving.`
+Start with a general hint. Phrase your hint in a way that encourages critical thinking and problem-solving.
+When you are done giving the hint, do not ask any questions if the student needs follow up help. There is no way for the 
+student to specifically type back, so after your hint, do not ask if the student for any further input to give you.`
 
     const result = await codioIDE.coachBot.ask({
       systemPrompt: systemPrompt,
