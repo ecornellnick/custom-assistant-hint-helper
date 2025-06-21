@@ -19,13 +19,16 @@ When providing hints:
   - Add a comment '// Example concept only - not a solution'
 - Be encouraging and positive in your tone
 - Help students discover the answer themselves
+- Do not ask the student for any input, to share their work so far, or if they have any questions. The student cannot reply to you.
 
 Key guidelines:
 - Do not write assignment code
 - Do not complete code for students
 - Do not provide direct solutions
 - Focus on learning concepts
-- Guide students to their own discoveries`
+- Guide students to their own discoveries
+- Do not ask the student for any input, to share their work so far, or if they have any questions. The student cannot reply to you.`
+
     
   codioIDE.onErrorState((isError, error) => {
     console.log('codioIDE.onErrorState', {isError, error})
@@ -60,7 +63,8 @@ If <assignment> and <code> are empty, assume that they're not available.
 Provide a helpful hint that guides the student toward understanding without revealing the solution.
 Start with a general hint. Phrase your hint in a way that encourages critical thinking and problem-solving.
 When you are done giving the hint, do not ask any questions if the student needs follow up help. There is no way for the 
-student to specifically type back, so after your hint, do not ask if the student for any further input to give you.`
+student to specifically type back, so after your hint, do not ask if the student for any further input to give you.
+Again, do not ask the student for any input, to share their work so far, or if they have any questions. The student cannot reply to you.`
 
     const result = await codioIDE.coachBot.ask({
       systemPrompt: systemPrompt,
